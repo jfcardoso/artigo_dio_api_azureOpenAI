@@ -105,6 +105,56 @@ Se você deseja colocar seu agente de IA em produção, você pode usar os segui
 Monitoramento e Ajustes
 Após a implantação, é essencial monitorar o desempenho da API e a interação do agente com os usuários. O Azure Monitor e o Application Insights podem ajudar a rastrear erros, tempo de resposta e desempenho das suas APIs. Além disso, é importante configurar logs de diagnóstico para identificar problemas rapidamente.
 ________________________________________
+## Passo 6: Introdução ao Semantics Kernel
+### O Que é o Semantics Kernel?
+O Semantics Kernel é uma ferramenta poderosa desenvolvida pela Microsoft que facilita a construção de agentes de IA mais sofisticados, utilizando modelos de linguagem natural como o GPT-3 ou GPT-4. Ele permite que você crie agentes de IA com maior flexibilidade, permitindo que eles acessem informações contextuais, façam chamadas a outras APIs e interajam de forma mais inteligente com os usuários.
+
+O Semantics Kernel oferece um conjunto de abstrações para combinar facilmente os modelos de IA com ações do mundo real, criando agentes de IA que podem conversar de forma fluida, sem precisar ser reprogramados constantemente. A ideia central do Semantics Kernel é criar agentes de IA autônomos, capazes de realizar tarefas específicas e tomar decisões com base em conteúdo semântico.
+
+### Como Funciona?
+O Semantics Kernel funciona como uma camada de orquestração para gerenciar e integrar múltiplos componentes. Ele pode coordenar as interações entre o modelo de linguagem, serviços externos (como APIs), e fluxos de trabalho personalizados, criando experiências de IA mais naturais e eficazes.
+
+### Exemplo de Implementação com Semantics Kernel
+Aqui está um exemplo de como você pode integrar o Semantics Kernel ao Azure OpenAI para criar um agente de IA que busca informações externas e responde a perguntas com base no contexto:
+
+```
+import openai
+from semantics_kernel import Kernel
+
+# Configurar chave de API do Azure OpenAI
+openai.api_key = 'SUA_CHAVE_DE_API'
+
+# Inicializar o Semantics Kernel
+kernel = Kernel()
+
+# Exemplo de agente de IA com o Semantics Kernel
+def agente_com_semantics_kernel(pergunta):
+    # Usar o modelo GPT para obter a resposta
+    response = openai.Completion.create(
+        engine="gpt-3.5-turbo",
+        prompt=f"Você é um assistente de uma loja online. Pergunta: {pergunta}",
+        max_tokens=100
+    )
+    
+    # Ações adicionais podem ser executadas aqui com o Semantics Kernel
+    return response.choices[0].text.strip()
+
+# Testar o agente de IA com Semantics Kernel
+pergunta = "Qual é o horário de funcionamento da loja?"
+resposta = agente_com_semantics_kernel(pergunta)
+print(resposta)
+
+```
+Neste exemplo, o Semantics Kernel pode ser utilizado para coordenar as interações do agente, permitindo que ele integre chamadas a APIs externas ou utilize informações adicionais para melhorar as respostas, dependendo do contexto ou dos dados disponíveis.
+
+### Benefícios do Semantics Kernel
+ - Integração Simples: Facilita a integração de múltiplas fontes de dados, APIs e serviços no fluxo do agente de IA.
+ - Escalabilidade: Suporta a criação de agentes complexos e a execução de múltiplas tarefas de forma eficiente.
+ - Customização: Oferece flexibilidade para personalizar o comportamento do agente, adaptando-o às necessidades do seu projeto.
+
+### Conclusão sobre Semantics Kernel
+O Semantics Kernel é uma excelente ferramenta para desenvolvedores que desejam construir agentes de IA mais poderosos e interativos. Ele facilita a integração com Azure OpenAI, além de permitir a adição de ações mais complexas ao fluxo de trabalho dos agentes, como consultas a bancos de dados, chamadas a outras APIs e tomadas de decisões mais precisas. É uma escolha ideal para quem deseja criar experiências de IA mais ricas e autônomas.
+____________________________________
 ## Conclusão
 Neste artigo, exploramos como integrar as APIs do Azure OpenAI e Azure Cognitive Services para criar soluções de IA, além de apresentar o conceito de agentes de IA que interagem de forma inteligente com os usuários. Aprendemos a configurar o ambiente, implementar agentes simples e realizar análise de sentimentos, além de considerar a implantação em produção e o monitoramento da aplicação.
 Com esses conhecimentos, você está pronto para construir aplicações de IA avançadas usando o Azure OpenAI e os Azure Cognitive Services, além de explorar as possibilidades que os agentes de IA oferecem para criar interações mais naturais e inteligentes.
